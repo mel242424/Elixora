@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommendations for Skincare & Makeup</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">✨ Elixora</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Recommendations</a></li>
+        <li><a href="#">Tips</a></li>
+        <li><button class="btn quiz-btn" id="openQuizBtn">Take Quiz</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Discover Your Personalized Luxury Beauty Routine</h1>
+      <p>Take our quick quiz and unlock bespoke skincare & makeup recommendations</p>
+      <div class="hero-buttons">
+        <button class="btn primary-btn" id="startQuizBtn">Start Quiz</button>
+        <a href="#" class="btn secondary-btn">Browse Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-products">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+      <div class="product-card">Luxury Serum</div>
+      <div class="product-card">Hydrating Cream</div>
+      <div class="product-card">Matte Lipstick</div>
+      <div class="product-card">Eyeshadow Palette</div>
+    </div>
+  </section>
+
+  <!-- Tips Section -->
+  <section class="tips-section">
+    <h2>Beauty Tips & Tricks</h2>
+    <div class="tips-grid">
+      <div class="tip-card">Winter Skincare Essentials</div>
+      <div class="tip-card">Makeup for Sensitive Skin</div>
+      <div class="tip-card">Nighttime Skincare Routine</div>
+    </div>
+  </section>
+
+  <!-- Quiz Modal (Adaptive MCQ) -->
+  <div class="modal" id="quizModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>Personalized Quiz</h2>
+      <div id="quizProgress">
+        <div id="progressBar"></div>
+      </div>
+      <form id="quizForm"></form>
+      <div class="quiz-buttons">
+        <button type="button" class="btn secondary-btn" id="prevBtn" style="display:none;">Back</button>
+        <button type="button" class="btn primary-btn" id="nextBtn">Next</button>
+        <button type="button" class="btn secondary-btn" id="skipQuizBtn">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 LuxeGlow. All Rights Reserved.</p>
+    <div class="social-icons">
+      <span>Instagram</span> | <span>Facebook</span> | <span>Twitter</span>
+    </div>
+  </footer>
+
+  <script src="js/homepage.js"></script>
+</body>
+</html>
+

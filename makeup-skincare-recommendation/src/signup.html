@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup - Makeup & Skincare</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-box">
+      <h1>Sign Up</h1>
+      <form id="signupForm">
+        <div class="form-group">
+          <input type="text" id="username" placeholder="Username" required>
+        </div>
+
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+
+        <!-- Password Rules -->
+        <ul class="password-rules" id="passwordRules">
+          <li id="rule-length"> 8–16 characters long</li>
+          <li id="rule-uppercase"> At least one uppercase letter</li>
+          <li id="rule-lowercase"> At least one lowercase letter</li>
+          <li id="rule-number"> At least one number</li>
+          <li id="rule-special"> At least one special character (!@#$%^&*)</li>
+        </ul>
+
+        <button type="submit" class="btn signup-btn">Sign Up</button>
+      </form>
+
+      <p class="or-divider">— OR —</p>
+
+      <!-- Google Sign Up -->
+      <button class="btn google-btn" id="googleSignup">Sign Up with Google</button>
+
+      <p class="redirect-text">Already have an account? <a href="login.html">Login</a></p>
+      <div id="errorMsg" class="error-msg"></div>
+    </div>
+  </div>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>
