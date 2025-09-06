@@ -3,83 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recommendations for Skincare & Makeup</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Elixora - Luxury Skincare & Makeup</title>
+  <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
-    <div class="logo">✨ Elixora</div>
-    <nav>
+    <div class="logo" id="logo">✨ Elixora</div>
+    <nav class="navbar">
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Recommendations</a></li>
-        <li><a href="#">Tips</a></li>
-        <li><button class="btn quiz-btn" id="openQuizBtn">Take Quiz</button></li>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <!-- Changed Take Quiz to open modal -->
+        <li><a href="#" id="openQuizModal" class="btn quiz-btn">Take Quiz</a></li>
       </ul>
     </nav>
+    <!-- Dropdown from Logo -->
+    <div class="dropdown" id="logoDropdown">
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="recommendations.html">Recommendations</a></li>
+        <li><a href="tips.html">Tips</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Slideshow -->
   <section class="hero">
+    <div class="hero-slide active" style="background-image: url('images/hero1.png');"></div>
+    <div class="hero-slide" style="background-image: url('images/hero2.png');"></div>
+    <div class="hero-slide" style="background-image: url('images/hero3.png');"></div>
     <div class="hero-text">
-      <h1>Discover Your Personalized Luxury Beauty Routine</h1>
-      <p>Take our quick quiz and unlock bespoke skincare & makeup recommendations</p>
-      <div class="hero-buttons">
-        <button class="btn primary-btn" id="startQuizBtn">Start Quiz</button>
-        <a href="#" class="btn secondary-btn">Browse Products</a>
-      </div>
+      <h1></h1>
+      <p></p>
     </div>
   </section>
 
-  <!-- Featured Products -->
-  <section class="featured-products">
-    <h2>Featured Products</h2>
-    <div class="product-grid">
-      <div class="product-card">Luxury Serum</div>
-      <div class="product-card">Hydrating Cream</div>
-      <div class="product-card">Matte Lipstick</div>
-      <div class="product-card">Eyeshadow Palette</div>
-    </div>
-  </section>
-
-  <!-- Tips Section -->
-  <section class="tips-section">
-    <h2>Beauty Tips & Tricks</h2>
-    <div class="tips-grid">
-      <div class="tip-card">Winter Skincare Essentials</div>
-      <div class="tip-card">Makeup for Sensitive Skin</div>
-      <div class="tip-card">Nighttime Skincare Routine</div>
-    </div>
-  </section>
-
-  <!-- Quiz Modal (Adaptive MCQ) -->
+  <!-- Quiz Popup -->
   <div class="modal" id="quizModal">
     <div class="modal-content">
       <span class="close-btn" id="closeModal">&times;</span>
-      <h2>Personalized Quiz</h2>
-      <div id="quizProgress">
-        <div id="progressBar"></div>
-      </div>
-      <form id="quizForm"></form>
-      <div class="quiz-buttons">
-        <button type="button" class="btn secondary-btn" id="prevBtn" style="display:none;">Back</button>
-        <button type="button" class="btn primary-btn" id="nextBtn">Next</button>
-        <button type="button" class="btn secondary-btn" id="skipQuizBtn">Skip</button>
+      <h2>Choose Your Quiz</h2>
+      <p>Would you like to start with the Makeup Quiz or Skincare Quiz?</p>
+      <div class="quiz-choice">
+        <a href="makeup.html" class="btn primary-btn">Makeup Quiz</a>
+        <a href="skincare.html" class="btn secondary-btn">Skincare Quiz</a>
+        <button id="skipQuizBtn" class="btn skip-btn">Skip</button>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 LuxeGlow. All Rights Reserved.</p>
-    <div class="social-icons">
-      <span>Instagram</span> | <span>Facebook</span> | <span>Twitter</span>
-    </div>
+    <p>&copy; 2025 Elixora. All Rights Reserved.</p>
   </footer>
 
   <script src="js/homepage.js"></script>
 </body>
 </html>
+
+
+
+
+
 

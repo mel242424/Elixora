@@ -1,0 +1,133 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f8e1f4, #e1f0ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.feedback-container {
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: #ff69b4;
+  transition: width 0.5s ease-in-out;
+}
+
+.progress-text {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.feedback-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.feedback-card.hide {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.feedback-card.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.emoji-options {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0 25px;
+}
+
+.emoji-options label {
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.emoji-options input {
+  display: none;
+}
+
+.emoji-options span {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.emoji-options input:checked + span {
+  background: #ffe6f2;
+  transform: scale(1.3);
+}
+
+.emoji-options label:hover span {
+  transform: scale(1.2);
+}
+
+#nextBtn {
+  background: #ff69b4;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#nextBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#nextBtn:hover:not(:disabled) {
+  background: #ff4081;
+}
+#homeBtn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#homeBtn:hover {
+  background: #388E3C;
+}
+#homeBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+

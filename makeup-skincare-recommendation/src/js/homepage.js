@@ -1,62 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
   const quizModal = document.getElementById("quizModal");
-  const startQuizBtn = document.getElementById("startQuizBtn");
-  const skipQuizBtn = document.getElementById("skipQuizBtn");
-  const closeModal = document.getElementById("closeModal");
-  const openQuizBtn = document.getElementById("openQuizBtn");
-  const quizForm = document.getElementById("quizForm");
-  const progressBar = document.getElementById("progressBar");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
+  const closeModalBtn = document.getElementById("closeModal");
+  const skipBtn = document.getElementById("skipQuizBtn");
+  const openQuizBtn = document.getElementById("openQuizModal"); 
+  const logo = document.getElementById("logo");
+  const dropdown = document.getElementById("logoDropdown");
 
-  quizModal.style.display = "block";
+  //  Show quiz modal on homepage load
+  quizModal.style.display = "flex";
 
-  startQuizBtn.addEventListener("click", () => quizModal.style.display = "block");
-  openQuizBtn.addEventListener("click", () => quizModal.style.display = "block");
-  closeModal.addEventListener("click", () => quizModal.style.display = "none");
-  skipQuizBtn.addEventListener("click", () => quizModal.style.display = "none");
-  window.addEventListener("click", e => { if(e.target==quizModal) quizModal.style.display="none"; });
-
-  // Adaptive Questions Array
-  const quizData = [
-    {id:1, q:"What is your skin type?", type:"skinType", options:["Oily","Dry","Combination","Normal"]},
-    {id:2, q:"Primary skin concern?", type:"skinConcern", options:["Acne","Dark Spots","Wrinkles","Dullness","Sensitivity"]},
-    {id:3, q:"Preferred product type?", type:"productType", options:["Serum","Cream","Makeup","All"]},
-  ];
-
-  let currentQuestion = 0;
-  let answers = {};
-
-  function loadQuestion(index){
-    const data = quizData[index];
-    let html = `<h3>${data.q}</h3>`;
-    data.options.forEach(opt=>{
-      html += `<label><input type="radio" name="answer" value="${opt}"> ${opt}</label><br>`;
+  //  Open quiz modal when clicking navbar "Take Quiz"
+  if (openQuizBtn) {
+    openQuizBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      quizModal.style.display = "flex";
     });
-    quizForm.innerHTML = html;
-    prevBtn.style.display = index>0 ? "inline-block":"none";
-    progressBar.style.width = ((index)/quizData.length)*100 + "%";
   }
 
-  loadQuestion(currentQuestion);
+  //  Close modal (X button)
+  closeModalBtn.addEventListener("click", () => {
+    quizModal.style.display = "none";
+  });
 
-  nextBtn.addEventListener("click", () => {
-    const selected = document.querySelector('input[name="answer"]:checked');
-    if(!selected){ alert("Please select an option"); return; }
-    answers[quizData[currentQuestion].type] = selected.value;
-    currentQuestion++;
-    if(currentQuestion >= quizData.length){
-      alert("Quiz Completed! Answers: "+JSON.stringify(answers));
-      quizModal.style.display="none";
-      return;
+  //  Skip closes modal
+  skipBtn.addEventListener("click", () => {
+    quizModal.style.display = "none";
+  });
+
+  //  Close modal if clicking outside modal content
+  window.addEventListener("click", (e) => {
+    if (e.target === quizModal) {
+      quizModal.style.display = "none";
     }
-    loadQuestion(currentQuestion);
   });
 
-  prevBtn.addEventListener("click", () => {
-    if(currentQuestion>0) currentQuestion--;
-    loadQuestion(currentQuestion);
+  //  Logo dropdown toggle
+  logo.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent window click from closing immediately
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
   });
+
+  //  Close dropdown if clicked outside
+  window.addEventListener("click", (e) => {
+    if (!logo.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
+
+  //  Start hero slideshow
+  startHeroSlideshow();
 });
+
+//  Hero Slideshow function
+function startHeroSlideshow() {
+  const slides = document.querySelectorAll(".hero-slide");
+  let index = 0;
+
+  // Make sure first slide is visible
+  slides[index].classList.add("active");
+
+  setInterval(() => {
+    slides[index].classList.remove("active"); // fade out current
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active"); // fade in next
+  }, 10000); // every 10 seconds
+}
 
 

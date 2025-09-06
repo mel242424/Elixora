@@ -308,3 +308,473 @@ body { background: #fef9f4; color: #333; }
 .footer .social-icons { margin-top:10px; font-size:0.9rem; }
 .footer .social-icons a { color:white; margin:0 10px; text-decoration:none; }
 
+/* Fonts & Reset */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fdf6ec;
+  color: #222;
+}
+
+/* Navbar */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.4); /* 40% opacity */
+  backdrop-filter: blur(8px); /* optional, enhances glass effect */
+  padding: 1rem 2rem;
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #d4af37;
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.header nav ul li a,
+.header nav ul li button {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header nav ul li a:hover,
+.header nav ul li button:hover {
+  color: #d4af37;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)),
+              url('../images/hero-bg.jpg') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: #d4af37;
+  color: #fff;
+}
+
+.secondary-btn {
+  background: #333;
+  color: #fff;
+}
+
+.makeup-btn {
+  background: #e8b4b8;
+  color: #fff;
+}
+
+.skincare-btn {
+  background: #8cc9c4;
+  color: #fff;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Featured Products */
+.featured-products {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.featured-products h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.product-card img {
+  width: 100%;
+  display: block;
+}
+
+.product-card h3 {
+  padding: 1rem;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Tips Section */
+.tips-section {
+  padding: 4rem 2rem;
+  background: #fff8f0;
+  text-align: center;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.tip-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.tip-card img {
+  width: 100%;
+  display: block;
+}
+
+.tip-card h3 {
+  padding: 1rem;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.4s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Progress Bar */
+#quizProgress {
+  background: #ddd;
+  border-radius: 20px;
+  height: 8px;
+  margin: 1rem 0;
+}
+
+#progressBar {
+  height: 8px;
+  width: 0%;
+  background: #d4af37;
+  border-radius: 20px;
+  transition: width 0.3s;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  background: #111;
+  color: #aaa;
+  padding: 2rem;
+}
+
+.footer .social-icons {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+/* General Reset */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fdf6ec;
+  color: #333;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent; 
+  position: relative;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-family: 'Playfair Display', serif;
+  color: #d4af37;
+  cursor: pointer;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #d4af37;
+}
+
+/* Dropdown */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 70px;
+  left: 40px;
+  background: #222;
+  border-radius: 8px;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 10px;
+}
+
+.dropdown ul li {
+  margin: 10px 0;
+}
+
+.dropdown ul a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 15px;
+  display: block;
+}
+
+.dropdown ul a:hover {
+  background: #333;
+  color: #d4af37;
+}
+
+/* Hero Section with Slideshow */
+.hero {
+  position: relative;
+  height: 85vh;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out; /* smooth fade */
+  z-index: 0;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: #d4af37;
+  color: #111;
+}
+
+.primary-btn:hover {
+  background: #c19a2e;
+}
+
+.secondary-btn {
+  background: #e8b4b8;
+  color: #111;
+}
+
+.secondary-btn:hover {
+  background: #d99aa2;
+}
+
+.skip-btn {
+  background: #aaa;
+  color: #fff;
+}
+
+.skip-btn:hover {
+  background: #888;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.quiz-choice {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: #111;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+.footer p {
+  margin: 5px 0;
+}
+.footer .social-icons a {
+  color: #aaa;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.footer .social-icons a:hover {
+  color: #d4af37;
+}

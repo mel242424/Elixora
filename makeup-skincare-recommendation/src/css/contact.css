@@ -1,0 +1,97 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f8e1f4, #e3f6f5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container */
+.contact-container {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+/* Headings */
+h1 {
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+.tagline {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Cards */
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.card {
+  background: #fafafa;
+  padding: 1.2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+.card h2 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+.card p {
+  margin: 0;
+  font-size: 1rem;
+}
+.card a {
+  text-decoration: none;
+  color: #d63384;
+  font-weight: bold;
+}
+
+/* Button */
+.actions {
+  margin-top: 2rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: #d63384;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.btn:hover {
+  background: #b32268;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeInUp 0.6s ease-in-out;
+}

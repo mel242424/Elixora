@@ -4,6 +4,22 @@
   <meta charset="UTF-8">
   <title>Signup - Makeup & Skincare</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    
+    .error-email {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      color: red;
+      font-size: 0.9rem;
+    }
+
+    .error-email img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
   <div class="form-container">
@@ -16,6 +32,10 @@
 
         <div class="form-group">
           <input type="email" id="email" placeholder="Email" required>
+          <div id="emailError" class="error-email" style="display: none;">
+            <img src="images/error-icon.png" alt="Error">
+            <span>Invalid Gmail address</span>
+          </div>
         </div>
 
         <div class="form-group">
@@ -24,11 +44,11 @@
 
         <!-- Password Rules -->
         <ul class="password-rules" id="passwordRules">
-          <li id="rule-length"> 8–16 characters long</li>
-          <li id="rule-uppercase"> At least one uppercase letter</li>
-          <li id="rule-lowercase"> At least one lowercase letter</li>
-          <li id="rule-number"> At least one number</li>
-          <li id="rule-special"> At least one special character (!@#$%^&*)</li>
+          <li id="rule-length">More than 8 characters long</li>
+          <li id="rule-uppercase">At least one uppercase letter</li>
+          <li id="rule-lowercase">At least one lowercase letter</li>
+          <li id="rule-number">At least one number</li>
+          <li id="rule-special">At least one special character (!@#$%^&*)</li>
         </ul>
 
         <button type="submit" class="btn signup-btn">Sign Up</button>
@@ -47,3 +67,4 @@
   <script src="js/signup.js"></script>
 </body>
 </html>
+
