@@ -1,74 +1,161 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const quizData = [
-    { q: "What is the first step in a skincare routine?", options: ["Moisturizer", "Cleanser", "Sunscreen", "Serum"], answer: "Cleanser" },
-    { q: "Which ingredient is best for acne?", options: ["Hyaluronic Acid", "Salicylic Acid", "Vitamin C", "Shea Butter"], answer: "Salicylic Acid" },
-    { q: "What does SPF protect against?", options: ["Pollution", "Sun damage", "Wrinkles", "Acne"], answer: "Sun damage" },
-    { q: "How often should you exfoliate?", options: ["Every day", "2-3 times a week", "Once a month", "Never"], answer: "2-3 times a week" },
-    { q: "Which ingredient hydrates skin?", options: ["Hyaluronic Acid", "Retinol", "Benzoyl Peroxide", "Clay"], answer: "Hyaluronic Acid" },
-    { q: "What does toner do?", options: ["Cleanses oil", "Balances pH", "Moisturizes", "Exfoliates"], answer: "Balances pH" },
-    { q: "Which vitamin brightens skin?", options: ["Vitamin D", "Vitamin C", "Vitamin B12", "Vitamin A"], answer: "Vitamin C" },
-    { q: "What should you always apply in the morning?", options: ["Night cream", "Sunscreen", "Exfoliator", "Face mask"], answer: "Sunscreen" },
-    { q: "Which ingredient helps with aging?", options: ["Retinol", "Salicylic Acid", "Clay", "Coconut oil"], answer: "Retinol" },
-    { q: "What’s a sheet mask primarily used for?", options: ["Hydration", "Exfoliation", "Sun protection", "Acne treatment"], answer: "Hydration" },
+  const questions = [
+    "What’s your skin type?",
+    "How often do you follow a skincare routine?",
+    "Do you use sunscreen daily?",
+    "Which product is essential for you?",
+    "Do you prefer natural or chemical products?",
+    "How often do you exfoliate?",
+    "Do you use serums?",
+    "Do you follow skincare trends?",
+    "How important is hydration?",
+    "Do you consult dermatologists?"
   ];
 
-  startQuiz(quizData);
-});
+  const optionsArray = [
+    ["Oily", "Dry", "Combination", "Normal"],
+    ["Daily", "Few times a week", "Occasionally", "Rarely"],
+    ["Yes", "Sometimes", "Rarely", "Never"],
+    ["Moisturizer", "Cleanser", "Sunscreen", "Serum"],
+    ["Natural", "Chemical", "Both", "Depends on product"],
+    ["Weekly", "Bi-weekly", "Monthly", "Rarely"],
+    ["Yes", "No", "Sometimes", "Rarely"],
+    ["Yes", "Occasionally", "No", "Sometimes"],
+    ["Very Important", "Somewhat", "Not Important", "I don’t mind"],
+    ["Always", "Sometimes", "Rarely", "Never"]
+  ];
 
-// Reuse same startQuiz() function as makeupQuiz.js
-function startQuiz(quizData) {
-  let currentQuestion = 0;
-  let score = 0;
-
-  const questionEl = document.getElementById("question");
-  const optionsEl = document.getElementById("options");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
-  const resultEl = document.getElementById("result");
+  const form = document.getElementById("skincareQuiz");
   const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
 
-  function loadQuestion() {
-    const data = quizData[currentQuestion];
-    questionEl.textContent = data.q;
-    optionsEl.innerHTML = "";
-    data.options.forEach(opt => {
-      const li = document.createElement("li");
-      li.innerHTML = `<input type="radio" name="option" value="${opt}" id="${opt}">
-                      <label for="${opt}">${opt}</label>`;
-      optionsEl.appendChild(li);
+  let currentQuestion = 0;
+  const answers = [];
+
+  function loadQuestion(index) {
+    form.innerHTML = "";
+    const card = document.createElement("div");
+    card.className = "question-card active";
+
+    const q = document.createElement("h2");
+    q.textContent = questions[index];
+    card.appendChild(q);
+
+    const optionsDiv = document.createElement("div");
+    optionsDiv.className = "options";
+
+    optionsArray[index].forEach(opt => {
+      const label = document.createElement("label");
+      label.textContent = opt;
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = `q${index}`;
+      input.value = opt;
+
+      input.addEventListener("change", () => {
+        optionsDiv.querySelectorAll("label").forEach(l => l.classList.remove("selected"));
+        label.classList.add("selected");
+      });
+
+      label.prepend(input);
+      optionsDiv.appendChild(label);
     });
 
-    progressBar.style.width = ((currentQuestion + 1) / quizData.length) * 100 + "%";
-    prevBtn.style.display = currentQuestion === 0 ? "none" : "inline-block";
-    nextBtn.textContent = currentQuestion === quizData.length - 1 ? "Submit" : "Next";
+    card.appendChild(optionsDiv);
+
+    const nav = document.createElement("div");
+    nav.className = "navigation";
+
+    if (index > 0) {
+      const backBtn = document.createElement("button");
+      backBtn.type = "button";
+      backBtn.textContent = "Back";
+      backBtn.addEventListener("click", () => {
+        currentQuestion--;
+        loadQuestion(currentQuestion);
+      });
+      nav.appendChild(backBtn);
+    }
+
+    const skipBtn = document.createElement("button");
+    skipBtn.type = "button";
+    skipBtn.textContent = "Skip";
+    skipBtn.addEventListener("click", () => {
+      answers[index] = "Skipped";
+      if (index < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion(currentQuestion);
+      } else {
+        showResults();
+      }
+    });
+    nav.appendChild(skipBtn);
+
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.textContent = index === questions.length - 1 ? "Finish" : "Next";
+    nextBtn.addEventListener("click", () => {
+      const selected = form.querySelector(`input[name="q${index}"]:checked`);
+      if (!selected) {
+        alert("Please select an option or skip!");
+        return;
+      }
+      answers[index] = selected.value;
+      if (index < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion(currentQuestion);
+      } else {
+        showResults();
+      }
+    });
+
+    nav.appendChild(nextBtn);
+    card.appendChild(nav);
+    form.appendChild(card);
+
+    const progress = ((index + 1) / questions.length) * 100;
+    progressBar.style.width = progress + "%";
+    progressText.textContent = `Question ${index + 1} of ${questions.length}`;
   }
 
-  nextBtn.addEventListener("click", () => {
-    const selected = document.querySelector('input[name="option"]:checked');
-    if (!selected) return alert("Please select an answer!");
+  function showResults() {
+    form.innerHTML = "";
+    const resultsDiv = document.createElement("div");
+    resultsDiv.className = "results";
 
-    if (selected.value === quizData[currentQuestion].answer) score++;
+    const h2 = document.createElement("h2");
+    h2.textContent = "Your Skincare Preferences:";
+    resultsDiv.appendChild(h2);
 
-    if (currentQuestion < quizData.length - 1) {
-      currentQuestion++;
-      loadQuestion();
-    } else {
-      showResult();
-    }
-  });
+    answers.forEach((ans, i) => {
+      const p = document.createElement("p");
+      p.textContent = `${i + 1}. ${questions[i]} — ${ans}`;
+      resultsDiv.appendChild(p);
+    });
 
-  prevBtn.addEventListener("click", () => {
-    if (currentQuestion > 0) {
-      currentQuestion--;
-      loadQuestion();
-    }
-  });
+   
 
-  function showResult() {
-    document.getElementById("quiz").style.display = "none";
-    resultEl.classList.remove("hidden");
-    resultEl.textContent = `🎉 You scored ${score} / ${quizData.length}`;
+    form.appendChild(resultsDiv);
   }
 
-  loadQuestion();
-}
+  loadQuestion(currentQuestion);
+});
+document.getElementById("homeBtn").onclick = () => {
+  window.location.href = "homepage.html";
+};
+
+document.getElementById("productsBtn").onclick = () => {
+  window.location.href = "products.html";
+};
+
+document.getElementById("restartBtn").onclick = () => {
+  location.reload();
+};
+
+
+
+
+
+
+

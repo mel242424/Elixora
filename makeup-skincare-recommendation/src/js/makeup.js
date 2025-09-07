@@ -1,73 +1,160 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const quizData = [
-    { q: "Which makeup product is used to even out skin tone?", options: ["Foundation", "Blush", "Lipstick", "Mascara"], answer: "Foundation" },
-    { q: "What tool is commonly used to blend foundation?", options: ["Sponge", "Eyelash curler", "Powder puff", "Brow brush"], answer: "Sponge" },
-    { q: "Which product is applied on eyelashes?", options: ["Eyeliner", "Mascara", "Concealer", "Lip gloss"], answer: "Mascara" },
-    { q: "What does primer do?", options: ["Brightens lips", "Preps skin", "Thickens lashes", "Sets makeup"], answer: "Preps skin" },
-    { q: "Which is a matte lip product?", options: ["Gloss", "Liquid lipstick", "Lip balm", "Highlighter"], answer: "Liquid lipstick" },
-    { q: "What’s used to contour the face?", options: ["Bronzer", "Primer", "Powder", "Mascara"], answer: "Bronzer" },
-    { q: "Which brush is used for blending eyeshadow?", options: ["Flat brush", "Fluffy brush", "Spoolie", "Angled brush"], answer: "Fluffy brush" },
-    { q: "What sets makeup in place?", options: ["Setting spray", "Eyeliner", "Lip gloss", "Blush"], answer: "Setting spray" },
-    { q: "Which color corrects dark circles?", options: ["Green", "Peach/Orange", "Purple", "Yellow"], answer: "Peach/Orange" },
-    { q: "Which makeup product defines eyebrows?", options: ["Lip liner", "Brow pencil", "Primer", "Blush"], answer: "Brow pencil" },
+  const questions = [
+    "What’s your go-to makeup style?",
+    "How often do you wear makeup?",
+    "Which product can’t you live without?",
+    "Do you prefer bold or natural looks?",
+    "What’s your favorite makeup brand?",
+    "How important is long-lasting makeup?",
+    "Do you enjoy experimenting with colors?",
+    "Which do you prefer: matte or glossy finish?",
+    "Do you follow makeup trends?",
+    "How do you usually apply makeup?"
   ];
 
-  startQuiz(quizData);
-});
+  const optionsArray = [
+    ["Natural", "Glam", "Minimal", "Dramatic"],
+    ["Everyday", "Few times a week", "Occasionally", "Rarely"],
+    ["Lipstick", "Mascara", "Foundation", "Eyeshadow"],
+    ["Bold", "Natural", "Depends on mood", "Mix both"],
+    ["Maybelline", "MAC", "Fenty", "Others"],
+    ["Very Important", "Somewhat", "Not Important", "I don’t mind"],
+    ["Yes, love colors", "Sometimes", "Rarely", "Never"],
+    ["Matte", "Glossy", "Mix", "Depends on look"],
+    ["Yes", "Sometimes", "Rarely", "No"],
+    ["Brush", "Fingers", "Beauty blender", "Combination"]
+  ];
 
-function startQuiz(quizData) {
-  let currentQuestion = 0;
-  let score = 0;
-
-  const questionEl = document.getElementById("question");
-  const optionsEl = document.getElementById("options");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
-  const resultEl = document.getElementById("result");
+  const form = document.getElementById("makeupQuiz");
   const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
 
-  function loadQuestion() {
-    const data = quizData[currentQuestion];
-    questionEl.textContent = data.q;
-    optionsEl.innerHTML = "";
-    data.options.forEach(opt => {
-      const li = document.createElement("li");
-      li.innerHTML = `<input type="radio" name="option" value="${opt}" id="${opt}">
-                      <label for="${opt}">${opt}</label>`;
-      optionsEl.appendChild(li);
+  let currentQuestion = 0;
+  const answers = [];
+
+  function loadQuestion(index) {
+    form.innerHTML = "";
+    const card = document.createElement("div");
+    card.className = "question-card active";
+
+    const q = document.createElement("h2");
+    q.textContent = questions[index];
+    card.appendChild(q);
+
+    const optionsDiv = document.createElement("div");
+    optionsDiv.className = "options";
+
+    optionsArray[index].forEach(opt => {
+      const label = document.createElement("label");
+      label.textContent = opt;
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = `q${index}`;
+      input.value = opt;
+
+      input.addEventListener("change", () => {
+        optionsDiv.querySelectorAll("label").forEach(l => l.classList.remove("selected"));
+        label.classList.add("selected");
+      });
+
+      label.prepend(input);
+      optionsDiv.appendChild(label);
     });
 
-    progressBar.style.width = ((currentQuestion + 1) / quizData.length) * 100 + "%";
-    prevBtn.style.display = currentQuestion === 0 ? "none" : "inline-block";
-    nextBtn.textContent = currentQuestion === quizData.length - 1 ? "Submit" : "Next";
+    card.appendChild(optionsDiv);
+
+    const nav = document.createElement("div");
+    nav.className = "navigation";
+
+    if (index > 0) {
+      const backBtn = document.createElement("button");
+      backBtn.type = "button";
+      backBtn.textContent = "Back";
+      backBtn.addEventListener("click", () => {
+        currentQuestion--;
+        loadQuestion(currentQuestion);
+      });
+      nav.appendChild(backBtn);
+    }
+
+    const skipBtn = document.createElement("button");
+    skipBtn.type = "button";
+    skipBtn.textContent = "Skip";
+    skipBtn.addEventListener("click", () => {
+      answers[index] = "Skipped";
+      if (index < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion(currentQuestion);
+      } else {
+        showResults();
+      }
+    });
+    nav.appendChild(skipBtn);
+
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.textContent = index === questions.length - 1 ? "Finish" : "Next";
+    nextBtn.addEventListener("click", () => {
+      const selected = form.querySelector(`input[name="q${index}"]:checked`);
+      if (!selected) {
+        alert("Please select an option or skip!");
+        return;
+      }
+      answers[index] = selected.value;
+      if (index < questions.length - 1) {
+        currentQuestion++;
+        loadQuestion(currentQuestion);
+      } else {
+        showResults();
+      }
+    });
+
+    nav.appendChild(nextBtn);
+    card.appendChild(nav);
+    form.appendChild(card);
+
+    const progress = ((index + 1) / questions.length) * 100;
+    progressBar.style.width = progress + "%";
+    progressText.textContent = `Question ${index + 1} of ${questions.length}`;
   }
 
-  nextBtn.addEventListener("click", () => {
-    const selected = document.querySelector('input[name="option"]:checked');
-    if (!selected) return alert("Please select an answer!");
+  function showResults() {
+    form.innerHTML = "";
+    const resultsDiv = document.createElement("div");
+    resultsDiv.className = "results";
 
-    if (selected.value === quizData[currentQuestion].answer) score++;
+    const h2 = document.createElement("h2");
+    h2.textContent = "Your Makeup Preferences:";
+    resultsDiv.appendChild(h2);
 
-    if (currentQuestion < quizData.length - 1) {
-      currentQuestion++;
-      loadQuestion();
-    } else {
-      showResult();
-    }
-  });
+    answers.forEach((ans, i) => {
+      const p = document.createElement("p");
+      p.textContent = `${i + 1}. ${questions[i]} — ${ans}`;
+      resultsDiv.appendChild(p);
+    });
 
-  prevBtn.addEventListener("click", () => {
-    if (currentQuestion > 0) {
-      currentQuestion--;
-      loadQuestion();
-    }
-  });
+    
 
-  function showResult() {
-    document.getElementById("quiz").style.display = "none";
-    resultEl.classList.remove("hidden");
-    resultEl.textContent = `🎉 You scored ${score} / ${quizData.length}`;
+    form.appendChild(resultsDiv);
   }
 
-  loadQuestion();
-}
+  loadQuestion(currentQuestion);
+});
+document.getElementById("homeBtn").onclick = () => {
+  window.location.href = "homepage.html";
+};
+
+document.getElementById("productsBtn").onclick = () => {
+  window.location.href = "products.html";
+};
+
+document.getElementById("restartBtn").onclick = () => {
+  location.reload();
+};
+
+
+
+
+
+
