@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("password").value.trim();
 
     // Demo credentials (replace with backend later)
-    const demoEmail = "user@google.com";
-    const demoPassword = "123456";
+    const demoEmail = "user@gmail.com";
+    const demoPassword = "1234567890";
 
     if (email === demoEmail && password === demoPassword) {
       alert("Login successful! Redirecting...");
