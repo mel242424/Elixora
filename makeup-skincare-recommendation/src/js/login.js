@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById("password").value.trim();
 
     // Demo credentials (replace with backend later)
-    const demoEmail = "user@example.com";
+    const demoEmail = "user@google.com";
     const demoPassword = "123456";
 
     if (email === demoEmail && password === demoPassword) {
